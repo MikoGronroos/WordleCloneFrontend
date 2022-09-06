@@ -1,0 +1,49 @@
+#Title {
+  text-align: center;
+}
+
+#Body {
+  background-color: #424242;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Wrapper{
+  display: grid;
+  column-gap: 10px;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+#SelectedLetterBox{
+  border-width: 5px;
+  border-color: white;
+}
+
+#CorrectLetterWrapper{
+  margin-top: 12%;
+}
+
+.LetterBox {
+  text-align: center;
+  color: black;
+  font-size: 45px;
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  border-radius: 50px;
+  border-width: 5px;
+  border-color: black;
+  border-style: solid;
+}
+
+.LetterBox#Incorrect{
+  background-color: red;
+}
+
+.LetterBox#Correct{
+  background-color: green;
+}
