@@ -11,9 +11,10 @@ let gameEnded = false;
 window.addEventListener('keydown', keyPressListener);
 
 window.addEventListener('load', (event) => {
-  axios.get('http://localhost:4000/getword').then(res =>{
-    word = res.data;
-}).catch(err => console.log(err))
+  axios.get('https://thatwordleapi.azurewebsites.net/get/').then(res =>{
+    word = res.data.Response;
+    console.log(word);
+  }).catch(err => console.log(err))
 });
 
 function getChildren(index){
@@ -32,6 +33,8 @@ function processAnwser(index){
     let box = letterBoxes.item(i);
     if(writtenAnwser[i] === word[i]){
       box.setAttribute('id','Correct');
+    }else if(word.includes(writtenAnwser[i])){
+      box.setAttribute('id','NotInCorrectPlace');
     }else{
       box.setAttribute('id','Incorrect');
     }
@@ -39,6 +42,25 @@ function processAnwser(index){
   }
   if(writtenAnwser.toLowerCase() === word.toLowerCase()){
     gameEnded = true;
+  }      
+  if(timesAnwsered >= 4)
+  {
+    gameEnded = true;
+  }
+  if(gameEnded)
+  {
+    ShowTheAnwser();
+  }
+}
+
+function ShowTheAnwser(){
+  let rows = document.getElementById("Anwser");
+  let children = rows.childNodes;
+  let row = children.item(0);
+  let letterBoxes = row.childNodes;
+  for (let i = 0; i < word.length; i++) {
+    let box = letterBoxes.item(i);
+    box.innerHTML = word[i];
   }
 }
 
@@ -61,14 +83,15 @@ function keyPressListener(e) {
     }
   }else if(key === 13){
     if(anwserIndex >= 5){
-
-      if(timesAnwsered >= 4) return;
       
-      processAnwser(timesAnwsered);
+      timesAnwsered++;
+
+      processAnwser(timesAnwsered - 1);
 
       writtenAnwser = "";
       anwserIndex = 0;
-      timesAnwsered++;
+
+      //Clear the writing line
       for(let i = 0; i < 5; i++){
         getChildren(i).innerHTML = "";
       }
@@ -105,6 +128,10 @@ function App() {
           <Row></Row>
           <Row></Row>
           <Row></Row>
+          <Row></Row>
+        </div>
+        <div id="Divider"></div>
+        <div id="Anwser">
           <Row></Row>
         </div>
       </div>

@@ -24,7 +24,7 @@
 }
 
 #CorrectLetterWrapper{
-  margin-top: 12%;
+  margin-top: 3%;
 }
 
 .LetterBox {
@@ -46,4 +46,17 @@
 
 .LetterBox#Correct{
   background-color: green;
+}
+
+.LetterBox#NotInCorrectPlace{
+  background-color: yellow;
+}
+
+#Anwser{
+  margin-top: 4%;
+}
+
+#Divider{
+  margin-top: 4%;
+  border-bottom: 7px solid rgba(255,255,255,1);
 }
